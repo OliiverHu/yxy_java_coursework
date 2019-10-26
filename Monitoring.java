@@ -23,16 +23,22 @@ class Monitoring {
         return myObservatories.get(index);
     }
 
-    Earthquake getTheLargestMagnitudeEarthquake() {
+    ArrayList<Earthquake> getTheLargestMagnitudeEarthquake() {
         double mag = 0;
-        Earthquake largestEarthquake = new Earthquake();
+        ArrayList<Earthquake> largestEarthquake = new ArrayList<>();
         for (Observatory myObservatory : myObservatories) {
-            Earthquake temp = myObservatory.getTheLargestMagnitudeEarthquake();
-//            if (temp == Null)
-            if (temp.getMagnitude() > mag) {
-                mag = temp.getMagnitude();
+            ArrayList<Earthquake> temp = myObservatory.getTheLargestMagnitudeEarthquake();
+            if (temp.get(0).getMagnitude() == -65535) {
+                //TODO: skip to next loop
+                continue;
+                //System.out.println(1);
+            }
+            //for (int i = 0; i<temp.size(); i++) {
+            if (temp.get(0).getMagnitude() > mag) {
+                mag = temp.get(0).getMagnitude();
                 largestEarthquake = temp;
             }
+            //}
         }
         return largestEarthquake;
     }

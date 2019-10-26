@@ -8,27 +8,35 @@ public class MonitoringIO {
 
     private void startMenu() {
         Scanner startMenuScanner = new Scanner(System.in);
+        System.out.println("-------------------------------------");
         System.out.println("1: Enter observatory data");
         System.out.println("2: Enter earthquake data");
         System.out.println("3: Provide all monitoring statistics");
         System.out.println("4: Exit");
+        System.out.println("-------------------------------------");
         System.out.println("\n");
         //System.out.println("");
         //System.out.println("");
-        int choice = startMenuScanner.nextInt();
-        while (choice != 4) {
-            if (choice == 1) {
-                menuOne();
+        String s = startMenuScanner.nextLine();
+        try {
+            int choice = Integer.parseInt(s);
+            while (choice != 4) {
+                if (choice == 1) {
+                    menuOne();
+                }
+                else if (choice == 2) {
+                    menuTwo();
+                }
+                else if (choice == 3) {
+                    menuThree();
+                }
+                else {
+                    warning();
+                }
             }
-            else if (choice == 2) {
-                menuTwo();
-            }
-            else if (choice == 3) {
-                menuThree();
-            }
-            else {
-                warning();
-            }
+        }
+        catch (Exception e) {
+            warning();
         }
     }
 
@@ -65,13 +73,20 @@ public class MonitoringIO {
 
     private void menuTwo() {
         Scanner menuTwoScanner = new Scanner(System.in);
-        System.out.println("Please Enter Earthquake Data");
 
         if (myMonitors.myObservatories.size() == 0) {
             System.out.println("No Observatories Documented!");
-            startMenu();
+            System.out.println("\n");
+            System.out.println("Press any key to proceed...");
+            try {
+                int waitKey = menuTwoScanner.nextInt();
+            }
+            catch (Exception e) {
+                startMenu();
+            }
         }
         else {
+            System.out.println("Please type in Earthquake Data!");
             System.out.println("Enter the Name of the Observatory");
             String nameOfOb = menuTwoScanner.nextLine();
             int indexOfOb = -1;
@@ -85,8 +100,12 @@ public class MonitoringIO {
                 System.out.println("Please double check the name you type in");
                 System.out.println("\n");
                 System.out.println("Press any key to proceed...");
-                int waitKey = menuTwoScanner.nextInt();
-                startMenu();
+                try {
+                    int waitKey = menuTwoScanner.nextInt();
+                }
+                catch (Exception e) {
+                    startMenu();
+                }
             }
             Earthquake tempEarthquake = new Earthquake();
 
@@ -122,6 +141,17 @@ public class MonitoringIO {
 
     private void menuThree() {
         Scanner menuThreeScanner = new Scanner(System.in);
+        if (myMonitors.myObservatories.size() == 0) {
+            System.out.println("No Observatories Documented!");
+            System.out.println("\n");
+            System.out.println("Press any key to proceed...");
+            try {
+                int waitKey = menuThreeScanner.nextInt();
+            }
+            catch (Exception e) {
+                startMenu();
+            }
+        }
         System.out.println("Provide all monitoring statistics");
         System.out.println("Please enter a threshold for filtering out recorded earthquakes");
         double threshold = menuThreeScanner.nextDouble();
@@ -134,23 +164,27 @@ public class MonitoringIO {
         System.out.println('\n');
 
         System.out.println("2: The largest magnitude earthquake ever recorded:");
-        System.out.println("Magnitude: " + myMonitors.getTheLargestMagnitudeEarthquake().getMagnitude());
-        System.out.println("Position(latitude, longitude): (" + myMonitors.getTheLargestMagnitudeEarthquake().getPosition().getLatitude() + ", " + myMonitors.getTheLargestMagnitudeEarthquake().getPosition().getLongitude() + ")");
-        System.out.println("Year of the Earthquake: " + myMonitors.getTheLargestMagnitudeEarthquake().getYearOfTheEvent());
-        System.out.println('\n');
+        ArrayList<Earthquake> outLargestMagnitudeList = myMonitors.getTheLargestMagnitudeEarthquake();
+        for (Earthquake value : outLargestMagnitudeList) {
+            System.out.println("Magnitude: " + value.getMagnitude());
+            value.getPosition().printPosition();
+            System.out.println("Year of the Earthquake: " + value.getYearOfTheEvent());
+            System.out.println('\n');
+        }
 
         System.out.println("3: earthquakes recorded with magnitude greater than " + threshold + ":");
         ArrayList<Earthquake> earthquakeOut = myMonitors.getAllEarthquakesWithMagnitudeAboveTheThreshold(threshold);
         for (Earthquake earthquake : earthquakeOut) {
             System.out.println("Magnitude: " + earthquake.getMagnitude());
-            System.out.println("Position(latitude, longitude): (" + earthquake.getPosition().getLatitude() + ", " + earthquake.getPosition().getLongitude() + ")");
+            earthquake.getPosition().printPosition();
             System.out.println("Year of the Earthquake: " + earthquake.getYearOfTheEvent());
         }
-        System.out.println('\n');
-
-        System.out.println("Press any key to proceed...");
-        int menuThreeChoice = menuThreeScanner.nextInt();
-        startMenu();
+        try {
+            int waitKey = menuThreeScanner.nextInt();
+        }
+        catch (Exception e) {
+            startMenu();
+        }
     }
 
     private void warning() {
@@ -159,8 +193,12 @@ public class MonitoringIO {
         System.out.println("Please type in a number between 1-4");
         System.out.println("\n");
         System.out.println("Press any key to proceed...");
-        int warningChoice = warningScanner.nextInt();
-        startMenu();
+        try {
+            int waitKey = warningScanner.nextInt();
+        }
+        catch (Exception e) {
+            startMenu();
+        }
     }
 
     public static void main(String[] args) {

@@ -51,20 +51,33 @@ class Observatory {
 //        return earthquakeEvents;
 //    }
 
-    Earthquake getTheLargestMagnitudeEarthquake() {
+    ArrayList<Earthquake> getTheLargestMagnitudeEarthquake() {
         double maximum = 0;
         int index = 0;
-//        if (earthquakeEvents.size() == 0) {
-//            return new Earthquake();
-//        }
-        for(int i = 0; i<earthquakeEvents.size(); i++){
+        ArrayList<Earthquake> maximumMagnitudeList = new ArrayList<>();
+        //TODO: the situation when array is empty
+        if (earthquakeEvents.size() == 0) {
+            Earthquake emptyEarthquake = new Earthquake();
+            emptyEarthquake.setMagnitude(-65535);
+            maximumMagnitudeList.add(emptyEarthquake);
+            return  maximumMagnitudeList;
+        }
+        for(int i = 0; i<earthquakeEvents.size(); i++) {
             double temp = earthquakeEvents.get(i).getMagnitude();
             if (temp > maximum) {
                 index = i;
                 maximum = temp;
             }
         }
-        return  earthquakeEvents.get(index);
+        maximumMagnitudeList.add(earthquakeEvents.get(index));
+        //TODO: the situation when 2 events share the 1st place
+        for(int i = 0; i<earthquakeEvents.size(); i++) {
+            double temp = earthquakeEvents.get(i).getMagnitude();
+            if (temp == maximum) {
+                maximumMagnitudeList.add(earthquakeEvents.get(i));
+            }
+        }
+        return  maximumMagnitudeList;
     }
 
     double getTheAverageMagnitude() {

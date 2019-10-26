@@ -19,8 +19,10 @@ class Earthquake {
             latitude = _latitude;
             longitude = _longitude;
         }
-        double getLatitude() { return latitude; }
-        double getLongitude() { return longitude; }
+        void printPosition() {
+            System.out.println("Position(latitude, longitude): (" + latitude + ", " + longitude + ")");
+        }
+        //double getLongitude() { return longitude; }
     }
 
     private double magnitude;

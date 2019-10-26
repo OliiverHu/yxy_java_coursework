@@ -18,26 +18,33 @@ public class EarthquakeTest {
         Scanner earthquakeTestScanner = new Scanner(System.in);
 
         //get the magnitude, position and time that associates with the earthquake event
-        double mag = earthquakeTestScanner.nextDouble();
-        myEarthquakeTestCase.setMagnitude(mag);
+        try {
+            System.out.println("Magnitude:");
+            double mag = earthquakeTestScanner.nextDouble();
+            System.out.println("Latitude:");
+            double _latitude = earthquakeTestScanner.nextDouble();
+            System.out.println("Longitude:");
+            double _longitude = earthquakeTestScanner.nextDouble();
+            System.out.println("Year:");
+            int yearOfTheEvent = earthquakeTestScanner.nextInt();
 
-        double _latitude = earthquakeTestScanner.nextDouble();
-        double _longitude = earthquakeTestScanner.nextDouble();
-        myEarthquakeTestCase.setPosition(_latitude, _longitude);
-
-        int yearOfTheEvent = earthquakeTestScanner.nextInt();
-        myEarthquakeTestCase.setYearOfTheEvent(yearOfTheEvent);
+            myEarthquakeTestCase.setMagnitude(mag);
+            myEarthquakeTestCase.setPosition(_latitude, _longitude);
+            myEarthquakeTestCase.setYearOfTheEvent(yearOfTheEvent);
+        }
+        catch (Exception e) {
+            System.out.println("输入有误！");
+            return;
+        }
 
         //output all the information we just type in
         double magOut = myEarthquakeTestCase.getMagnitude();
-        double lati = myEarthquakeTestCase.getPosition().getLatitude();
-        double longi = myEarthquakeTestCase.getPosition().getLongitude();
         int yearOut = myEarthquakeTestCase.getYearOfTheEvent();
         System.out.println("---------------------");
         System.out.println("What you just type in");
         System.out.println("---------------------");
         System.out.println("Magnitude: " + magOut);
-        System.out.println("Position(latitude, longitude): (" + lati + ", " + longi + ")");
+        myEarthquakeTestCase.getPosition().printPosition();
         System.out.println("Year: " + yearOut);
     }
 }
