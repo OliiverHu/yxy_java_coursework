@@ -15,29 +15,37 @@ public class MonitoringIO {
         System.out.println("4: Exit");
         System.out.println("-------------------------------------");
         System.out.println("\n");
-        //System.out.println("");
-        //System.out.println("");
         String s = startMenuScanner.nextLine();
-        try {
-            int choice = Integer.parseInt(s);
-            while (choice != 4) {
+        while (true) {
+            try {
+                int choice = Integer.parseInt(s);
+                //System.out.println("");
+                //System.out.println("");
                 if (choice == 1) {
                     menuOne();
-                }
-                else if (choice == 2) {
+                } else if (choice == 2) {
                     menuTwo();
-                }
-                else if (choice == 3) {
+                } else if (choice == 3) {
                     menuThree();
-                }
-                else {
+                } else if (choice == 4) {
+                    return;
+                } else {
                     warning();
                 }
+                System.out.println("-------------------------------------");
+                System.out.println("1: Enter observatory data");
+                System.out.println("2: Enter earthquake data");
+                System.out.println("3: Provide all monitoring statistics");
+                System.out.println("4: Exit");
+                System.out.println("-------------------------------------");
+                System.out.println("\n");
+                s = startMenuScanner.nextLine();
+            }
+            catch (Exception e) {
+                warning();
             }
         }
-        catch (Exception e) {
-            warning();
-        }
+
     }
 
     private void menuOne() {
@@ -66,9 +74,6 @@ public class MonitoringIO {
         if (menuOneChoice == 1) {
             menuOne();
         }
-        else {
-            startMenu();
-        }
     }
 
     private void menuTwo() {
@@ -78,12 +83,11 @@ public class MonitoringIO {
             System.out.println("No Observatories Documented!");
             System.out.println("\n");
             System.out.println("Press any key to proceed...");
-            try {
-                int waitKey = menuTwoScanner.nextInt();
-            }
-            catch (Exception e) {
-                startMenu();
-            }
+//            try {
+            String waitKey = menuTwoScanner.nextLine();
+//            }
+//            catch (Exception ignored) {
+//            }
         }
         else {
             System.out.println("Please type in Earthquake Data!");
@@ -100,12 +104,13 @@ public class MonitoringIO {
                 System.out.println("Please double check the name you type in");
                 System.out.println("\n");
                 System.out.println("Press any key to proceed...");
-                try {
-                    int waitKey = menuTwoScanner.nextInt();
-                }
-                catch (Exception e) {
-                    startMenu();
-                }
+//                try {
+                String waitKey = menuTwoScanner.nextLine();
+                return;
+//                }
+//                catch (Exception e) {
+//                    return;
+//                }
             }
             Earthquake tempEarthquake = new Earthquake();
 
@@ -133,9 +138,6 @@ public class MonitoringIO {
             if (menuTwoChoice == 1) {
                 menuTwo();
             }
-            else {
-                startMenu();
-            }
         }
     }
 
@@ -145,12 +147,14 @@ public class MonitoringIO {
             System.out.println("No Observatories Documented!");
             System.out.println("\n");
             System.out.println("Press any key to proceed...");
-            try {
-                int waitKey = menuThreeScanner.nextInt();
-            }
-            catch (Exception e) {
-                startMenu();
-            }
+            return;
+//            try {
+//                int waitKey = menuThreeScanner.nextInt();
+//                startMenu();
+//            }
+//            catch (Exception e) {
+//                startMenu();
+//            }
         }
         System.out.println("Provide all monitoring statistics");
         System.out.println("Please enter a threshold for filtering out recorded earthquakes");
@@ -179,12 +183,15 @@ public class MonitoringIO {
             earthquake.getPosition().printPosition();
             System.out.println("Year of the Earthquake: " + earthquake.getYearOfTheEvent());
         }
-        try {
-            int waitKey = menuThreeScanner.nextInt();
-        }
-        catch (Exception e) {
-            startMenu();
-        }
+        System.out.println("\n");
+        System.out.println("Press any key to proceed...");
+//        try {
+        String waitKey = menuThreeScanner.nextLine();
+//            return;
+//        }
+//        catch (Exception e) {
+//            return;
+//        }
     }
 
     private void warning() {
@@ -193,12 +200,13 @@ public class MonitoringIO {
         System.out.println("Please type in a number between 1-4");
         System.out.println("\n");
         System.out.println("Press any key to proceed...");
-        try {
-            int waitKey = warningScanner.nextInt();
-        }
-        catch (Exception e) {
-            startMenu();
-        }
+//        try {
+        String waitKey = warningScanner.nextLine();
+//            return;
+//        }
+//        catch (Exception e) {
+//            return;
+//        }
     }
 
     public static void main(String[] args) {
