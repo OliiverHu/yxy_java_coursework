@@ -1,0 +1,8 @@
+CSC8001,Programming and Data Structures,20
+CSC8002,Advanced Programming,20
+CSC8009,Research Methods for Computer Science,20
+CSC8010,Computer Environments,20
+CSC8004,Networks and Web Technologies,30
+CSC8005,Software Engineering with Group Project,30
+CSC8008,Information Systems,50
+CSC8099,Project and Dissertation for MSc Computer Science,50
