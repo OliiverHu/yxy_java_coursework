@@ -1,1 +1,1 @@
-BinarySemaphore test case
+# multithreading and concurrency - BinarySemaphore practice
