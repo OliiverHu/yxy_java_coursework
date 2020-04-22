@@ -16,3 +16,7 @@
 ### coursework2020 
 
 -> student information management system;
+
+### coursework2020_2
+
+-> multithreading & concurrency (binary semaphore implementation, producer&consumer);
